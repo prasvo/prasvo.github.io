@@ -9,25 +9,35 @@
         content="Independent technical due diligence, cloud architecture diagnostics, and EBITDA recovery for Private Equity Operating Partners and Portfolio Executives.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0A0D12;
-            --bg-secondary: #12161F;
-            --bg-card: #181E29;
-            --border-color: #262F40;
-            --border-light: #34425A;
-            --text-primary: #F0F4F8;
-            --text-secondary: #94A3B8;
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --bg-subtle: #F1F5F9;
+            --bg-accent-light: #F0F9FF;
+            --border-color: #E2E8F0;
+            --border-hover: #CBD5E1;
+            
+            --text-primary: #0F172A;
+            --text-secondary: #334155;
             --text-muted: #64748B;
-            --accent-gold: #D4AF37;
-            --accent-blue: #38BDF8;
-            --accent-green: #10B981;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            --accent-blue: #0284C7;
+            --accent-blue-hover: #0369A1;
+            --accent-blue-subtle: rgba(2, 132, 199, 0.08);
+            --accent-green: #059669;
+            --accent-gold: #D97706;
+            
+            --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+            --shadow-lg: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
         }
 
         * {
@@ -36,9 +46,13 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            background-color: var(--bg-body);
+            color: var(--text-secondary);
             font-family: var(--font-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -46,9 +60,9 @@
         }
 
         .container {
-            max-width: 1140px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
         /* Header / Nav */
@@ -56,79 +70,159 @@
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            background-color: rgba(10, 13, 18, 0.9);
-            backdrop-filter: blur(12px);
-            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
         }
 
         .nav-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 68px;
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            text-decoration: none;
+        .brand-link {
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .logo-tag {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            background-color: rgba(56, 189, 248, 0.1);
+            font-size: 0.725rem;
+            font-weight: 600;
+            padding: 2px 7px;
+            background-color: var(--accent-blue-subtle);
             color: var(--accent-blue);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(2, 132, 199, 0.2);
             border-radius: 4px;
             text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            font-size: 0.9rem;
+            gap: 8px;
+            padding: 9px 18px;
+            font-size: 0.875rem;
             font-weight: 600;
-            border-radius: 6px;
+            border-radius: 7px;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.25 ease;
             cursor: pointer;
+            border: 1px solid transparent;
         }
 
         .btn-primary {
             background-color: var(--text-primary);
-            color: var(--bg-primary);
-            border: 1px solid var(--text-primary);
+            color: #FFFFFF;
+            border-color: var(--text-primary);
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
         }
 
         .btn-primary:hover {
-            background-color: #E2E8F0;
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
             transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-outline {
-            background-color: transparent;
+            background-color: var(--bg-surface);
             color: var(--text-primary);
-            border: 1px solid var(--border-light);
+            border-color: var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-outline:hover {
-            background-color: var(--bg-secondary);
-            border-color: var(--text-secondary);
+            background-color: var(--bg-subtle);
+            border-color: var(--border-hover);
+            color: var(--accent-blue);
+        }
+
+        /* Mobile Hamburger Button */
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            gap: 12px;
+        }
+
+        .mobile-menu.open {
+            display: flex;
         }
 
         /* Hero Section */
         .hero {
-            padding: 120px 0 80px;
+            padding: 36px 0 28px;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-body) 100%);
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            align-items: center;
         }
 
         .badge {
@@ -136,273 +230,378 @@
             align-items: center;
             gap: 8px;
             font-family: var(--font-mono);
-            font-size: 0.825rem;
-            color: var(--accent-gold);
-            background-color: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-blue);
+            background-color: var(--accent-blue-subtle);
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            padding: 4px 10px;
             border-radius: 20px;
-            margin-bottom: 28px;
+            margin-bottom: 14px;
         }
 
         .hero h1 {
-            font-size: 3.25rem;
-            font-weight: 700;
+            font-size: clamp(1.75rem, 3vw, 2.4rem);
+            font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.03em;
-            margin-bottom: 24px;
-            max-width: 900px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
         }
 
-        .hero h1 span {
+        .hero h1 .highlight {
             color: var(--accent-blue);
+            background: linear-gradient(120deg, #0284C7 0%, #2563EB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-lead {
-            font-size: 1.25rem;
+            font-size: 0.975rem;
             color: var(--text-secondary);
-            max-width: 760px;
-            margin-bottom: 40px;
+            margin-bottom: 18px;
             font-weight: 400;
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
         .hero-cta {
             display: flex;
-            gap: 16px;
+            gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
-        /* Stats / Value Bar */
+        /* Hero Showcase Image */
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            background: var(--bg-surface);
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .hero-image-wrapper:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.775rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+        }
+
+        /* Metrics Bar */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 80px;
-            padding-top: 40px;
+            gap: 14px;
+            margin-top: 24px;
+            padding-top: 18px;
             border-top: 1px solid var(--border-color);
         }
 
         .metric-card {
-            background: var(--bg-secondary);
+            background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            padding: 24px;
-            border-radius: 8px;
+            padding: 18px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .metric-value {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--accent-green);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
         }
 
         .metric-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        /* Focus Areas */
+        /* Section Layouts */
         .section {
-            padding: 100px 0;
+            padding: 64px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
         .section-header {
-            margin-bottom: 60px;
+            margin-bottom: 36px;
         }
 
         .section-title {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--accent-blue);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
         }
 
         .section-heading {
-            font-size: 2.25rem;
-            font-weight: 700;
+            font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+            font-weight: 800;
             letter-spacing: -0.02em;
+            color: var(--text-primary);
         }
 
+        /* Services / Practice Cards */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            gap: 20px;
         }
 
         .service-card {
-            background-color: var(--bg-card);
+            background-color: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 40px;
-            transition: border-color 0.2s ease;
+            border-radius: 12px;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card:hover {
-            border-color: var(--border-light);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .service-icon {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--accent-gold);
-            margin-bottom: 20px;
-            display: block;
+            margin-bottom: 12px;
+            display: inline-block;
+            background: rgba(217, 119, 6, 0.08);
+            padding: 3px 8px;
+            border-radius: 5px;
+            align-self: flex-start;
         }
 
         .service-card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 16px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
             letter-spacing: -0.01em;
         }
 
         .service-card p {
             color: var(--text-secondary);
-            font-size: 0.975rem;
-            margin-bottom: 24px;
+            font-size: 0.925rem;
+            margin-bottom: 18px;
+            line-height: 1.55;
         }
 
         .service-list {
             list-style: none;
+            margin-top: auto;
         }
 
         .service-list li {
             font-size: 0.875rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             padding: 8px 0;
-            border-top: 1px solid rgba(38, 47, 64, 0.6);
+            border-top: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .service-list li::before {
-            content: "→";
+            content: "✓";
             color: var(--accent-blue);
-            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 0.85rem;
         }
 
         /* Diagnostic Process */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 18px;
         }
 
         .process-step {
-            background-color: var(--bg-secondary);
+            background-color: var(--bg-surface);
             border: 1px solid var(--border-color);
-            padding: 32px;
-            border-radius: 8px;
+            padding: 24px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
             position: relative;
+            transition: all 0.25s ease;
+        }
+
+        .process-step:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
 
         .step-num {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.775rem;
+            font-weight: 700;
             color: var(--accent-blue);
-            margin-bottom: 16px;
-            display: block;
+            background: var(--accent-blue-subtle);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+            display: inline-block;
         }
 
         .process-step h4 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
         }
 
         .process-step p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            line-height: 1.55;
         }
 
         /* Principal Bio */
         .bio-wrapper {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 48px;
+            grid-template-columns: 200px 1fr;
+            gap: 28px;
             align-items: center;
-            background: var(--bg-card);
+            background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            padding: 48px;
-            border-radius: 12px;
+            padding: 32px 28px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-sm);
         }
 
         .bio-avatar {
             width: 100%;
             aspect-ratio: 1/1;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-mono);
-            font-size: 2.5rem;
-            color: var(--accent-blue);
-            font-weight: 700;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
         }
 
         .bio-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 2px;
         }
 
         .bio-title {
             font-family: var(--font-mono);
-            font-size: 0.85rem;
+            font-size: 0.825rem;
+            font-weight: 600;
             color: var(--accent-gold);
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             display: block;
         }
 
         .bio-text {
             color: var(--text-secondary);
-            font-size: 0.975rem;
-            margin-bottom: 16px;
+            font-size: 0.925rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
         }
 
         /* Call to Action Footer */
         .cta-section {
-            padding: 120px 0;
+            padding: 72px 0;
             text-align: center;
-            background: radial-gradient(circle at center, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(2, 132, 199, 0.05) 0%, rgba(248, 250, 252, 0) 70%);
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
+            font-size: clamp(1.8rem, 3vw, 2.3rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 12px;
             letter-spacing: -0.02em;
         }
 
         .cta-section p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 36px;
+            font-size: 1.025rem;
+            max-width: 580px;
+            margin: 0 auto 28px;
         }
 
         .cta-box {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
-            background-color: var(--bg-card);
+            gap: 14px;
+            background-color: var(--bg-surface);
             border: 1px solid var(--border-color);
-            padding: 32px 48px;
-            border-radius: 12px;
+            padding: 32px 36px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-md);
         }
 
         .email-link {
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 0.975rem;
+            font-weight: 600;
             color: var(--accent-blue);
             text-decoration: none;
             border-bottom: 1px dashed var(--accent-blue);
             padding-bottom: 2px;
+            transition: all 0.2s ease;
         }
 
         .email-link:hover {
@@ -413,9 +612,10 @@
         /* Footer */
         footer {
             border-top: 1px solid var(--border-color);
-            padding: 40px 0;
+            padding: 32px 0;
             font-size: 0.85rem;
             color: var(--text-muted);
+            background-color: var(--bg-surface);
         }
 
         .footer-wrapper {
@@ -424,29 +624,81 @@
             align-items: center;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero h1 {
-                font-size: 2.25rem;
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .hero-image-wrapper {
+                max-width: 540px;
+                margin: 0 auto;
+            }
+
+            .bio-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .bio-avatar {
+                width: 120px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 14px;
+            }
+
+            .logo-tag {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 36px 0 28px;
+            }
+
+            .section {
+                padding: 44px 0;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
             }
 
             .services-grid,
             .metrics-grid,
             .process-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
             }
 
+            .service-card,
+            .process-step,
             .bio-wrapper {
-                grid-template-columns: 1fr;
+                padding: 20px 16px;
             }
 
-            .bio-avatar {
-                width: 120px;
+            .cta-box {
+                padding: 24px 18px;
+                width: 100%;
             }
 
             .footer-wrapper {
                 flex-direction: column;
-                gap: 16px;
+                gap: 10px;
                 text-align: center;
             }
         }
@@ -455,16 +707,39 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation Header -->
     <header>
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#" class="logo">
-                    PT TECH ADVISORY
-                    <span class="logo-tag">PE Advisory Practice</span>
+                <a href="#" class="brand-link">
+                    <img src="favicon.png" alt="PT Tech Advisory Logo" class="logo-img">
+                    <span class="logo-text">
+                        PT TECH ADVISORY
+                        <span class="logo-tag">PE Advisory</span>
+                    </span>
                 </a>
-                <a href="mailto:prasath@pttechadvisory.com" class="btn btn-outline">Executive Contact</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#focus" class="nav-link">Practice Areas</a></li>
+                    <li><a href="#methodology" class="nav-link">Methodology</a></li>
+                    <li><a href="#leadership" class="nav-link">Leadership</a></li>
+                    <li>
+                        <a href="mailto:prasath@pttechadvisory.com" class="btn btn-primary email-btn">Executive Contact</a>
+                    </li>
+                </ul>
+
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
+                    ☰
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#focus" class="nav-link mobile-link">Practice Areas</a>
+            <a href="#methodology" class="nav-link mobile-link">Methodology</a>
+            <a href="#leadership" class="nav-link mobile-link">Leadership</a>
+            <a href="mailto:prasath@pttechadvisory.com" class="btn btn-primary email-btn">Executive Contact</a>
         </div>
     </header>
 
@@ -473,22 +748,38 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <div class="badge">
-                    <span>•</span> Independent Technical Due Diligence & Portfolio Operations
-                </div>
-                <h1>Quantifying Cloud Architecture Risk. <span>Unlocking Portfolio EBITDA.</span></h1>
-                <p class="hero-lead">
-                    We partner with Private Equity Operating Partners, Investment Committees, and Portfolio Executive
-                    teams to diagnose cloud infrastructure drag, eliminate gross margin leakage, and validate technical
-                    architecture prior to acquisition or exit.
-                </p>
-                <div class="hero-cta">
-                    <a href="mailto:prasath@pttechadvisory.com?subject=Confidential%20Briefing%20Inquiry"
-                        class="btn btn-primary">Request a Confidential Briefing</a>
-                    <a href="#focus" class="btn btn-outline">Explore Diagnostics</a>
+                <div class="hero-grid">
+                    <div>
+                        <div class="badge">
+                            <span>•</span> Independent Technical Due Diligence & Portfolio Operations
+                        </div>
+                        <h1>Quantifying Cloud Architecture Risk. <span class="highlight">Unlocking Portfolio EBITDA.</span></h1>
+                        <p class="hero-lead">
+                            We partner with Private Equity Operating Partners, Investment Committees, and Portfolio Executive
+                            teams to diagnose cloud infrastructure drag, eliminate gross margin leakage, and validate technical
+                            architecture prior to acquisition or exit.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="mailto:prasath@pttechadvisory.com?subject=Confidential%20Briefing%20Inquiry"
+                                class="btn btn-primary email-btn">Request a Confidential Briefing</a>
+                            <a href="#focus" class="btn btn-outline">Explore Diagnostics</a>
+                        </div>
+                    </div>
+
+                    <!-- Top Visual Asset -->
+                    <div class="hero-image-wrapper">
+                        <img src="images/hero.jpg" alt="Cloud Architecture Executive Overview Dashboard" class="hero-image" width="640" height="640" loading="eager">
+                        <div class="hero-image-overlay">
+                            <span style="display: flex; align-items: center; gap: 8px;">
+                                <span class="live-dot"></span>
+                                PE Advisory Platform Diagnostics
+                            </span>
+                            <span style="color: var(--accent-blue); font-family: var(--font-mono);">ACTIVE</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Strategic Metrics Bar -->
+                <!-- Strategic Metrics Grid -->
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-value">15% - 35%</div>
@@ -506,7 +797,7 @@
             </div>
         </section>
 
-        <!-- Focus Areas -->
+        <!-- Focus Areas / Practice Areas -->
         <section id="focus" class="section">
             <div class="container">
                 <div class="section-header">
@@ -515,7 +806,7 @@
                 </div>
 
                 <div class="services-grid">
-                    <!-- Service 1 -->
+                    <!-- Practice 01 -->
                     <div class="service-card">
                         <span class="service-icon">[ PRACTICE 01 ]</span>
                         <h3>Pre-Acquisition Technical Due Diligence</h3>
@@ -529,7 +820,7 @@
                         </ul>
                     </div>
 
-                    <!-- Service 2 -->
+                    <!-- Practice 02 -->
                     <div class="service-card">
                         <span class="service-icon">[ PRACTICE 02 ]</span>
                         <h3>Cloud Infrastructure EBITDA Recovery</h3>
@@ -547,7 +838,7 @@
         </section>
 
         <!-- Diagnostic Methodology -->
-        <section class="section" style="background-color: var(--bg-secondary);">
+        <section id="methodology" class="section" style="background-color: var(--bg-subtle);">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title">// Diagnostic Methodology</div>
@@ -577,8 +868,8 @@
             </div>
         </section>
 
-        <!-- Leadership / Principal -->
-        <section class="section">
+        <!-- Leadership Section -->
+        <section id="leadership" class="section">
             <div class="container">
                 <div class="section-header">
                     <div class="section-title">// Practice Leadership</div>
@@ -586,7 +877,7 @@
                 </div>
 
                 <div class="bio-wrapper">
-                    <div class="bio-avatar">PT</div>
+                    <img src="images/pt.jpg" alt="Prasath Thangaraj" class="bio-avatar">
                     <div class="bio-content">
                         <h3>Prasath Thangaraj</h3>
                         <span class="bio-title">Managing Principal & Technical Lead</span>
@@ -604,7 +895,7 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
+        <!-- Call to Action -->
         <section class="cta-section">
             <div class="container">
                 <h2>Initiate a Confidential Discussion</h2>
@@ -612,9 +903,9 @@
                     portfolio companies.</p>
 
                 <div class="cta-box">
-                    <a href="mailto:prasath@pttechadvisory.com" class="btn btn-primary">Schedule Advisory Call</a>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">Direct Inquiry:</span>
-                    <a href="mailto:prasath@pttechadvisory.com" class="email-link">prasath@pttechadvisory.com</a>
+                    <a href="mailto:prasath@pttechadvisory.com" class="btn btn-primary email-btn">Schedule Advisory Call</a>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Direct Executive Inquiry:</span>
+                    <a href="mailto:prasath@pttechadvisory.com" class="email-link email-btn">prasath@pttechadvisory.com</a>
                 </div>
             </div>
         </section>
@@ -633,6 +924,55 @@
             </div>
         </div>
     </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile menu toggle
+        const toggleBtn = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (toggleBtn && mobileMenu) {
+            toggleBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+                toggleBtn.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    toggleBtn.textContent = '☰';
+                });
+            });
+        }
+
+        // Smooth scroll for internal hash links (prevents file:// security origin frame warnings)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                e.preventDefault();
+                if (!targetId || targetId === '' || targetId === 'top') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const targetElem = document.getElementById(targetId);
+                if (targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Email confirmation dialog
+        const emailButtons = document.querySelectorAll('.email-btn');
+        emailButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const confirmed = confirm("You are initiating contact with Prasath Thangaraj at prasath@pttechadvisory.com.\n\nProceed to open your default email application?");
+                if (!confirmed) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 
 </body>
 
