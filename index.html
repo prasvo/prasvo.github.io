@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Tech Advisory | Sovereign Technical Due Diligence & Cloud EBITDA Recovery</title>
+    <meta name="description"
+        content="Independent technical due diligence, cloud architecture diagnostics, and EBITDA recovery for Private Equity Operating Partners and Portfolio Executives.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0A0D12;
+            --bg-secondary: #12161F;
+            --bg-card: #181E29;
+            --border-color: #262F40;
+            --border-light: #34425A;
+            --text-primary: #F0F4F8;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --accent-gold: #D4AF37;
+            --accent-blue: #38BDF8;
+            --accent-green: #10B981;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Nav */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: rgba(10, 13, 18, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #E2E8F0;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.825rem;
+            color: var(--accent-gold);
+            background-color: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            font-size: 3.25rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-blue);
+        }
+
+        .hero-lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 760px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        /* Stats / Value Bar */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 6px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Focus Areas */
+        .section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .section-heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px;
+            transition: border-color 0.2s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .service-icon {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.975rem;
+            margin-bottom: 24px;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            padding: 8px 0;
+            border-top: 1px solid rgba(38, 47, 64, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-list li::before {
+            content: "→";
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        /* Diagnostic Process */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .process-step {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .step-num {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .process-step h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Principal Bio */
+        .bio-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 48px;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 48px;
+            border-radius: 12px;
+        }
+
+        .bio-avatar {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .bio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .bio-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .bio-text {
+            color: var(--text-secondary);
+            font-size: 0.975rem;
+            margin-bottom: 16px;
+        }
+
+        /* Call to Action Footer */
+        .cta-section {
+            padding: 120px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 36px;
+        }
+
+        .cta-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 32px 48px;
+            border-radius: 12px;
+        }
+
+        .email-link {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-blue);
+            padding-bottom: 2px;
+        }
+
+        .email-link:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .services-grid,
+            .metrics-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bio-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .bio-avatar {
+                width: 120px;
+            }
+
+            .footer-wrapper {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">
+                    PT TECH ADVISORY
+                    <span class="logo-tag">PE Advisory Practice</span>
+                </a>
+                <a href="mailto:prasath@pttechadvisory.com" class="btn btn-outline">Executive Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="badge">
+                    <span>•</span> Independent Technical Due Diligence & Portfolio Operations
+                </div>
+                <h1>Quantifying Cloud Architecture Risk. <span>Unlocking Portfolio EBITDA.</span></h1>
+                <p class="hero-lead">
+                    We partner with Private Equity Operating Partners, Investment Committees, and Portfolio Executive
+                    teams to diagnose cloud infrastructure drag, eliminate gross margin leakage, and validate technical
+                    architecture prior to acquisition or exit.
+                </p>
+                <div class="hero-cta">
+                    <a href="mailto:prasath@pttechadvisory.com?subject=Confidential%20Briefing%20Inquiry"
+                        class="btn btn-primary">Request a Confidential Briefing</a>
+                    <a href="#focus" class="btn btn-outline">Explore Diagnostics</a>
+                </div>
+
+                <!-- Strategic Metrics Bar -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">15% - 35%</div>
+                        <div class="metric-label">Average Recoverable Cloud Gross Margin Leakage</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">10-Day</div>
+                        <div class="metric-label">Rapid Technical Due Diligence Turnaround Window</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Independent, Unbiased & Non-Sponsor Aligned Diagnostics</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Focus Areas -->
+        <section id="focus" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">// Advisory Practice Areas</div>
+                    <h2 class="section-heading">Targeted Technical Interventions for PE Value Creation</h2>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <span class="service-icon">[ PRACTICE 01 ]</span>
+                        <h3>Pre-Acquisition Technical Due Diligence</h3>
+                        <p>Rapid, high-signal audit of target software assets, cloud infrastructure, and engineering
+                            operations during M&A pipeline evaluation.</p>
+                        <ul class="service-list">
+                            <li>Codebase quality, maintainability, and architectural scalability</li>
+                            <li>Sovereignty, licensing, and open-source dependency exposure</li>
+                            <li>Infra resilience, single-points-of-failure, and security posture</li>
+                            <li>Post-acquisition capex/opex engineering projection model</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <span class="service-icon">[ PRACTICE 02 ]</span>
+                        <h3>Cloud Infrastructure EBITDA Recovery</h3>
+                        <p>Surgical diagnostic and execution plan to eliminate over-provisioned infrastructure,
+                            inefficient cloud topology, and margin-eroding tech drag.</p>
+                        <ul class="service-list">
+                            <li>AWS / GCP / Azure multi-cloud margin leakage analysis</li>
+                            <li>Unit economics & cost-per-tenant architectural mapping</li>
+                            <li>DevOps pipeline automation & compute efficiency tuning</li>
+                            <li>Contract negotiation technical leverage strategy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnostic Methodology -->
+        <section class="section" style="background-color: var(--bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">// Diagnostic Methodology</div>
+                    <h2 class="section-heading">Structured Audit Framework</h2>
+                </div>
+
+                <div class="process-grid">
+                    <div class="process-step">
+                        <span class="step-num">PHASE 01</span>
+                        <h4>Architectural Telemetry</h4>
+                        <p>Non-intrusive extraction of cloud configuration state, deployment topology, and cost
+                            attribution telemetry mapped directly to financial balance sheets.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">PHASE 02</span>
+                        <h4>EBITDA Leakage Mapping</h4>
+                        <p>Pinpointing architectural inefficiencies and uncoupling non-performing cloud overhead from
+                            core revenue-generating product workloads.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">PHASE 03</span>
+                        <h4>Remediation Roadmap</h4>
+                        <p>Delivering prioritized engineering action plans designed for immediate operational execution
+                            by target PortCo technical leadership.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership / Principal -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-title">// Practice Leadership</div>
+                    <h2 class="section-heading">Sovereign Executive Expertise</h2>
+                </div>
+
+                <div class="bio-wrapper">
+                    <div class="bio-avatar">PT</div>
+                    <div class="bio-content">
+                        <h3>Prasath Thangaraj</h3>
+                        <span class="bio-title">Managing Principal & Technical Lead</span>
+                        <p class="bio-text">
+                            Prasath specializes in complex cloud diagnostics, software architecture evaluation, and
+                            technology due diligence for high-growth software enterprises and private equity sponsors.
+                        </p>
+                        <p class="bio-text">
+                            With deep expertise across cloud infrastructure economics, distributed systems engineering,
+                            and technical risk management, he advises deal teams and operating partners on maximizing
+                            portfolio gross margins and de-risking technology acquisitions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Initiate a Confidential Discussion</h2>
+                <p>Discuss an upcoming M&A target or evaluate EBITDA optimization potential across your existing
+                    portfolio companies.</p>
+
+                <div class="cta-box">
+                    <a href="mailto:prasath@pttechadvisory.com" class="btn btn-primary">Schedule Advisory Call</a>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Direct Inquiry:</span>
+                    <a href="mailto:prasath@pttechadvisory.com" class="email-link">prasath@pttechadvisory.com</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-wrapper">
+                <div>
+                    &copy; 2026 PT Tech Advisory. All rights reserved.
+                </div>
+                <div>
+                    Private Equity Technical Advisory
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
